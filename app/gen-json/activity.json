@@ -1,0 +1,362 @@
+{
+  "name": "activity",
+  "namespaces": {
+    "java": "brigade.thriftshop.activity",
+    "rb": "ThriftShop.Activity"
+  },
+  "includes": [
+  ],
+  "enums": [
+    {
+      "name": "PositionAgreement",
+      "members": [
+        {
+          "name": "AGREE",
+          "value": 1
+        },
+        {
+          "name": "DISAGREE",
+          "value": 2
+        },
+        {
+          "name": "UNSURE",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "SignAction",
+      "members": [
+        {
+          "name": "SIGN",
+          "value": 1
+        },
+        {
+          "name": "UNSIGN",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "SupportAction",
+      "members": [
+        {
+          "name": "SUPPORT",
+          "value": 1
+        },
+        {
+          "name": "UNSUPPORT",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "typedefs": [
+    {
+      "name": "Timestamp",
+      "typeId": "i64"
+    },
+    {
+      "name": "ProfileId",
+      "typeId": "i32"
+    }
+  ],
+  "structs": [
+    {
+      "name": "PositionResponse",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "position_id",
+          "typeId": "i32",
+          "required": "optional"
+        },
+        {
+          "key": 2,
+          "name": "agreement",
+          "typeId": "i32",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "PositionCreation",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "position_id",
+          "typeId": "i32",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "PositionReasonCreation",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "position_reason_id",
+          "typeId": "i32",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "PetitionSign",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "petition_id",
+          "typeId": "i32",
+          "required": "optional"
+        },
+        {
+          "key": 2,
+          "name": "sign_action",
+          "typeId": "i32",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "CampaignSupport",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "campaign_id",
+          "typeId": "i32",
+          "required": "optional"
+        },
+        {
+          "key": 2,
+          "name": "support_action",
+          "typeId": "i32",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "ProfileSupport",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "supported_profile_id",
+          "typeId": "i32",
+          "required": "optional"
+        },
+        {
+          "key": 2,
+          "name": "support_action",
+          "typeId": "i32",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "PositionReasonUpvote",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "position_reason_id",
+          "typeId": "i32",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "ActivityData",
+      "isException": false,
+      "isUnion": true,
+      "fields": [
+        {
+          "key": 1,
+          "name": "position_response",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "PositionResponse"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 2,
+          "name": "position_creation",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "PositionCreation"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 3,
+          "name": "position_reason_creation",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "PositionReasonCreation"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 4,
+          "name": "petition_sign",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "PetitionSign"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 5,
+          "name": "campaign_support",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "CampaignSupport"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 6,
+          "name": "profile_support",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "ProfileSupport"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 7,
+          "name": "position_reason_upvote",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "PositionReasonUpvote"
+          },
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "ActivityEvent",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "uuid",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 2,
+          "name": "timestamp",
+          "typeId": "i64",
+          "required": "optional"
+        },
+        {
+          "key": 3,
+          "name": "profile_id",
+          "typeId": "i32",
+          "required": "optional"
+        },
+        {
+          "key": 4,
+          "name": "activity_data",
+          "typeId": "union",
+          "type": {
+            "typeId": "union",
+            "class": "ActivityData"
+          },
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "ActivityStream",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "activity_events",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "struct",
+            "elemType": {
+              "typeId": "struct",
+              "class": "ActivityEvent"
+            }
+          },
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "ProfileActivityStream",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "profile_id",
+          "typeId": "i32",
+          "required": "optional"
+        },
+        {
+          "key": 2,
+          "name": "activity_stream",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "ActivityStream"
+          },
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "ActivityStreamBatch",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "profile_activity_streams",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "struct",
+            "elemType": {
+              "typeId": "struct",
+              "class": "ProfileActivityStream"
+            }
+          },
+          "required": "optional"
+        }
+      ]
+    }
+  ],
+  "constants": [
+  ],
+  "services": [
+  ]
+}

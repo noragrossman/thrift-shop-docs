@@ -1,0 +1,497 @@
+{
+  "name": "shared",
+  "namespaces": {
+    "java": "services.shared",
+    "rb": "ThriftShop.Shared",
+    "scala": "services.scala.shared"
+  },
+  "includes": [
+  ],
+  "enums": [
+    {
+      "name": "ArgumentExceptionCode",
+      "members": [
+        {
+          "name": "PRESENCE",
+          "value": 0
+        },
+        {
+          "name": "INVALID",
+          "value": 1
+        },
+        {
+          "name": "RESOURCE_NOT_FOUND",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Service",
+      "members": [
+        {
+          "name": "ACTION",
+          "value": 0
+        },
+        {
+          "name": "AUTH",
+          "value": 1
+        },
+        {
+          "name": "BRIGADE",
+          "value": 2
+        },
+        {
+          "name": "CAMPAIGN",
+          "value": 3
+        },
+        {
+          "name": "EVENT_BUS",
+          "value": 4
+        },
+        {
+          "name": "INFLUENCE",
+          "value": 5
+        },
+        {
+          "name": "CONTACT",
+          "value": 6
+        },
+        {
+          "name": "CAMPAIGN_RECOMMENDATION",
+          "value": 7
+        },
+        {
+          "name": "GROUP",
+          "value": 8
+        },
+        {
+          "name": "EXPERIMENT",
+          "value": 9
+        },
+        {
+          "name": "ALIGNMENT",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "name": "EntityRole",
+      "members": [
+        {
+          "name": "ADMIN",
+          "value": 0
+        },
+        {
+          "name": "GUEST",
+          "value": 1
+        },
+        {
+          "name": "LOGGED_OUT",
+          "value": 2
+        },
+        {
+          "name": "USER",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "BoundaryLimitPaginationDirection",
+      "members": [
+        {
+          "name": "AFTER",
+          "value": 0
+        },
+        {
+          "name": "BEFORE",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "SortOrder",
+      "members": [
+        {
+          "name": "DESC",
+          "value": 1
+        },
+        {
+          "name": "ASC",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "ClientPlatform",
+      "members": [
+        {
+          "name": "UNKNOWN",
+          "value": 1
+        },
+        {
+          "name": "ANDROID",
+          "value": 2
+        },
+        {
+          "name": "WEB",
+          "value": 3
+        },
+        {
+          "name": "IOS",
+          "value": 4
+        }
+      ]
+    }
+  ],
+  "typedefs": [
+    {
+      "name": "CloudinaryPublicId",
+      "typeId": "string"
+    },
+    {
+      "name": "CloudinaryUrl",
+      "typeId": "string"
+    },
+    {
+      "name": "DateTime",
+      "typeId": "string"
+    },
+    {
+      "name": "DeepLink",
+      "typeId": "string"
+    },
+    {
+      "name": "RequestId",
+      "typeId": "string"
+    },
+    {
+      "name": "YouTubeUrl",
+      "typeId": "string"
+    },
+    {
+      "name": "Uid",
+      "typeId": "string"
+    },
+    {
+      "name": "Url",
+      "typeId": "string"
+    },
+    {
+      "name": "Timestamp",
+      "typeId": "i64"
+    }
+  ],
+  "structs": [
+    {
+      "name": "Entity",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 3,
+          "name": "uuid",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 2,
+          "name": "role",
+          "typeId": "i32",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "Parameter",
+      "isException": false,
+      "isUnion": true,
+      "fields": [
+        {
+          "key": 1,
+          "name": "uid_t",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 2,
+          "name": "date_time_t",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 3,
+          "name": "string_t",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 4,
+          "name": "i32_t",
+          "typeId": "i32",
+          "required": "optional"
+        },
+        {
+          "key": 5,
+          "name": "i64_t",
+          "typeId": "i64",
+          "required": "optional"
+        },
+        {
+          "key": 6,
+          "name": "bool_t",
+          "typeId": "bool",
+          "required": "optional"
+        },
+        {
+          "key": 7,
+          "name": "double_t",
+          "typeId": "double",
+          "required": "optional"
+        },
+        {
+          "key": 8,
+          "name": "null_t",
+          "typeId": "bool",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "JobExecutionParams",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "job_class",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "job_params",
+          "typeId": "map",
+          "type": {
+            "typeId": "map",
+            "keyTypeId": "string",
+            "valueTypeId": "union",
+            "valueType": {
+              "typeId": "union",
+              "class": "Parameter"
+            }
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "BoundaryLimitPaginationParams",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "direction",
+          "typeId": "i32",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "limit",
+          "typeId": "i32",
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "boundary_uid",
+          "typeId": "string",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "BoundaryLimitPageInfo",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "has_before",
+          "typeId": "bool",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "has_after",
+          "typeId": "bool",
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "total_count",
+          "typeId": "i32",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "UtmParams",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "utm_source",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "utm_campaign",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 3,
+          "name": "utm_content",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 4,
+          "name": "utm_medium",
+          "typeId": "string",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "RequestContext",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "invitation_uid",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 2,
+          "name": "share_uid",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 3,
+          "name": "email_message_uid",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 4,
+          "name": "install_deep_link",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 5,
+          "name": "launched_url",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 6,
+          "name": "utm_params",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "UtmParams"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 7,
+          "name": "client_platform",
+          "typeId": "i32",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "RequestHeaders",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "entity",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "Entity"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 2,
+          "name": "request_id",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "context",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "RequestContext"
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "ArgumentException",
+      "isException": true,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "message",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "path",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "code",
+          "typeId": "i32",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "UnauthorizedException",
+      "isException": true,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "message",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    }
+  ],
+  "constants": [
+  ],
+  "services": [
+  ]
+}

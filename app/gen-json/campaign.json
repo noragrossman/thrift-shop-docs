@@ -1,0 +1,1243 @@
+{
+  "name": "campaign",
+  "namespaces": {
+    "java": "services.campaign",
+    "rb": "ThriftShop.Campaign",
+    "scala": "services.scala.campaign"
+  },
+  "includes": [
+"shared",
+"event_bus"
+  ],
+  "enums": [
+  ],
+  "typedefs": [
+  ],
+  "structs": [
+    {
+      "name": "Campaign",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "name",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 4,
+          "name": "leader_entity_uuid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 5,
+          "name": "mission",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 6,
+          "name": "image",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 7,
+          "name": "launched_at",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 8,
+          "name": "topic_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "GetCampaignsRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "campaign_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 2,
+          "name": "launched",
+          "typeId": "bool",
+          "required": "optional"
+        },
+        {
+          "key": 3,
+          "name": "pagination_params",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "shared.BoundaryLimitPaginationParams"
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "PaginatedCampaigns",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "page_info",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "shared.BoundaryLimitPageInfo"
+          },
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "campaigns",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "struct",
+            "elemType": {
+              "typeId": "struct",
+              "class": "Campaign"
+            }
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "CreateCampaignRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 2,
+          "name": "name",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "leader_entity_uuid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 4,
+          "name": "mission",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 5,
+          "name": "image",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 6,
+          "name": "topic_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "EditCampaignRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "name",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 3,
+          "name": "leader_entity_uuid",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 4,
+          "name": "mission",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 5,
+          "name": "image",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 6,
+          "name": "topic_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "AddPetitionRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "campaign_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "petition_uid",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "AddPetitionSignatureRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "petition_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "entity_uuid",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "GetPetitionUidsRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "campaign_uid",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 2,
+          "name": "campaign_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "GetSupporterUidsRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "campaign_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "pagination_params",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "shared.BoundaryLimitPaginationParams"
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "PaginatedSupporterUids",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "page_info",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "shared.BoundaryLimitPageInfo"
+          },
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "supporter_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "LaunchCampaignRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "campaign_uid",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "GetCampaignForPetitionRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "petition_uid",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "CampaignUpdate",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "campaign_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "title",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 4,
+          "name": "image",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 5,
+          "name": "video",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 6,
+          "name": "body",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 8,
+          "name": "rich_text_body",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 7,
+          "name": "created_at",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "CreateCampaignUpdateRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "campaign_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "title",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "image",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 4,
+          "name": "video",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 5,
+          "name": "body",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 6,
+          "name": "rich_text_body",
+          "typeId": "string",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "EditCampaignUpdateRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "title",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 3,
+          "name": "image",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 4,
+          "name": "video",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 5,
+          "name": "body",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 6,
+          "name": "rich_text_body",
+          "typeId": "string",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "PaginatedCampaignUpdates",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "page_info",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "shared.BoundaryLimitPageInfo"
+          },
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "campaign_updates",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "struct",
+            "elemType": {
+              "typeId": "struct",
+              "class": "CampaignUpdate"
+            }
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "GetCampaignUpdatesRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "campaign_uid",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 2,
+          "name": "campaign_update_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 3,
+          "name": "pagination_params",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "shared.BoundaryLimitPaginationParams"
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "DeleteCampaignUpdateRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "campaign_update_uid",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    }
+  ],
+  "constants": [
+  ],
+  "services": [
+    {
+      "name": "CampaignService",
+      "functions": [
+        {
+          "name": "create_campaign",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "Campaign"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "CreateCampaignRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "edit_campaign",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "Campaign"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "EditCampaignRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "get_campaigns",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "PaginatedCampaigns"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "GetCampaignsRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "add_petition",
+          "returnTypeId": "void",
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "AddPetitionRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "get_petition_uids",
+          "returnTypeId": "list",
+          "returnType": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "GetPetitionUidsRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "add_petition_signature",
+          "returnTypeId": "void",
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "AddPetitionSignatureRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "get_supporter_uids",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "PaginatedSupporterUids"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "GetSupporterUidsRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "launch_campaign",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "Campaign"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "LaunchCampaignRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "receive_event_bus_message_parcel",
+          "returnTypeId": "void",
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "message_parcel",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "event_bus.MessageParcel"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+          ]
+        },
+        {
+          "name": "get_campaign_for_petition",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "Campaign"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "GetCampaignForPetitionRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "create_campaign_update",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "CampaignUpdate"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "CreateCampaignUpdateRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "edit_campaign_update",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "CampaignUpdate"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "EditCampaignUpdateRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "delete_campaign_update",
+          "returnTypeId": "void",
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "DeleteCampaignUpdateRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "get_campaign_updates",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "PaginatedCampaignUpdates"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "GetCampaignUpdatesRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

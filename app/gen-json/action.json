@@ -1,0 +1,2315 @@
+{
+  "name": "action",
+  "namespaces": {
+    "java": "services.action",
+    "rb": "ThriftShop.Action",
+    "scala": "services.scala.action"
+  },
+  "includes": [
+"shared",
+"event_bus"
+  ],
+  "enums": [
+    {
+      "name": "PetitionLifecycleState",
+      "members": [
+        {
+          "name": "DRAFT",
+          "value": 0
+        },
+        {
+          "name": "ACTIVE",
+          "value": 1
+        },
+        {
+          "name": "CLOSED",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "GetPetitionsSortField",
+      "members": [
+        {
+          "name": "LAUNCHED_AT",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "GetPetitionsSortOrder",
+      "members": [
+        {
+          "name": "ASC",
+          "value": 0
+        },
+        {
+          "name": "DESC",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "GetEntitySignaturesSortField",
+      "members": [
+        {
+          "name": "SIGNATURE_DATE",
+          "value": 1
+        },
+        {
+          "name": "GRADES_PUBLISHED_DATE",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "PetitionTargetType",
+      "members": [
+        {
+          "name": "CANDIDACY",
+          "value": 0
+        },
+        {
+          "name": "TERM",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "PetitionTargetGrade",
+      "members": [
+        {
+          "name": "SUCCESS",
+          "value": 0
+        },
+        {
+          "name": "FAILURE",
+          "value": 1
+        },
+        {
+          "name": "NEUTRAL",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "FilterTermsByEntityActionsOption",
+      "members": [
+        {
+          "name": "SOME_ACTIONS_TAKEN",
+          "value": 1
+        },
+        {
+          "name": "NO_ACTIONS_TAKEN",
+          "value": 2
+        },
+        {
+          "name": "NO_ACTIONS_AVAILABLE",
+          "value": 3
+        }
+      ]
+    }
+  ],
+  "typedefs": [
+  ],
+  "structs": [
+    {
+      "name": "PetitionGradeLegend",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "success_description",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "failure_description",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "neutral_description",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "Petition",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "title",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "summary",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 4,
+          "name": "description",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 5,
+          "name": "target_description",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 6,
+          "name": "image",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 7,
+          "name": "signature_goal",
+          "typeId": "i32",
+          "required": "req_out"
+        },
+        {
+          "key": 8,
+          "name": "deadline",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 9,
+          "name": "launched_at",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 10,
+          "name": "closed_at",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 11,
+          "name": "grade_legend",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "PetitionGradeLegend"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 12,
+          "name": "grades_published",
+          "typeId": "bool",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "CreatePetitionRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "title",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "summary",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "description",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 4,
+          "name": "target_description",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 5,
+          "name": "image",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 6,
+          "name": "signature_goal",
+          "typeId": "i32",
+          "required": "req_out"
+        },
+        {
+          "key": 7,
+          "name": "deadline",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 8,
+          "name": "grade_legend",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "PetitionGradeLegend"
+          },
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "EditPetitionRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "title",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 3,
+          "name": "summary",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 4,
+          "name": "description",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 5,
+          "name": "target_description",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 6,
+          "name": "image",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 7,
+          "name": "signature_goal",
+          "typeId": "i32",
+          "required": "optional"
+        },
+        {
+          "key": 8,
+          "name": "deadline",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 9,
+          "name": "grade_legend",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "PetitionGradeLegend"
+          },
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "GetPetitionsFilterParams",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "petition_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 4,
+          "name": "lifecycle_states",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "i32"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 3,
+          "name": "term_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 5,
+          "name": "signed_by_entity_uuids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 6,
+          "name": "unsigned_by_entity_uuid",
+          "typeId": "string",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "GetEntitySignaturesFilterParams",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "petition_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 2,
+          "name": "graded",
+          "typeId": "bool",
+          "required": "optional"
+        },
+        {
+          "key": 3,
+          "name": "term_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "GetEntitySignaturesSortParams",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "sort_field",
+          "typeId": "i32",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "sort_order",
+          "typeId": "i32",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "GetPetitionTargetsFilterParams",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "target_types",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "i32"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 2,
+          "name": "exclude_term_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 3,
+          "name": "term_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 4,
+          "name": "petition_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 5,
+          "name": "petition_target_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "GetPetitionsSortParams",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "sort_field",
+          "typeId": "i32",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "sort_order",
+          "typeId": "i32",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "GetPetitionsRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 3,
+          "name": "pagination_params",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "shared.BoundaryLimitPaginationParams"
+          },
+          "required": "req_out"
+        },
+        {
+          "key": 4,
+          "name": "filter_params",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "GetPetitionsFilterParams"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 5,
+          "name": "sort_params",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "GetPetitionsSortParams"
+          },
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "PaginatedPetitions",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "page_info",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "shared.BoundaryLimitPageInfo"
+          },
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "petitions",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "struct",
+            "elemType": {
+              "typeId": "struct",
+              "class": "Petition"
+            }
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "PetitionSignature",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "entity_uuid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "petition_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 4,
+          "name": "created_at",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "CreatePetitionSignatureRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "entity_uuid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "entity_district_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "petition_uid",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "GetEntitySignaturesRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "entity_uuid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "pagination_params",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "shared.BoundaryLimitPaginationParams"
+          },
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "filter_params",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "GetEntitySignaturesFilterParams"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 4,
+          "name": "sort_params",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "GetEntitySignaturesSortParams"
+          },
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "GetPetitionSignaturesRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "petition_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "entity_uuids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 3,
+          "name": "pagination_params",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "shared.BoundaryLimitPaginationParams"
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "IsPermittedToSignPetitionRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "petition_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "entity_district_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "PaginatedPetitionSignatures",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "page_info",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "shared.BoundaryLimitPageInfo"
+          },
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "petition_signatures",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "struct",
+            "elemType": {
+              "typeId": "struct",
+              "class": "PetitionSignature"
+            }
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "PetitionTermTarget",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 3,
+          "name": "uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 1,
+          "name": "petition_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "term_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 4,
+          "name": "grade",
+          "typeId": "i32",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "PetitionCandidacyTarget",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 3,
+          "name": "uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 1,
+          "name": "petition_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "candidacy_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 4,
+          "name": "grade",
+          "typeId": "i32",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "PetitionTarget",
+      "isException": false,
+      "isUnion": true,
+      "fields": [
+        {
+          "key": 1,
+          "name": "term_target",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "PetitionTermTarget"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 2,
+          "name": "candidacy_target",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "PetitionCandidacyTarget"
+          },
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "PaginatedPetitionTargets",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "page_info",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "shared.BoundaryLimitPageInfo"
+          },
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "petition_targets",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "union",
+            "elemType": {
+              "typeId": "union",
+              "class": "PetitionTarget"
+            }
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "AddTermTargetItem",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "term_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "district_uid",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "AddCandidacyTargetItem",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "candidacy_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "district_uid",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "AddPetitionTermTargetsRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "petition_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "term_targets",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "struct",
+            "elemType": {
+              "typeId": "struct",
+              "class": "AddTermTargetItem"
+            }
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "AddPetitionCandidacyTargetsRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "petition_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "candidacy_targets",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "struct",
+            "elemType": {
+              "typeId": "struct",
+              "class": "AddCandidacyTargetItem"
+            }
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "GradePetitionTargetsItem",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "petition_target_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "petition_target_type",
+          "typeId": "i32",
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "petition_target_grade",
+          "typeId": "i32",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "GradePetitionTargetsRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "graded_items",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "struct",
+            "elemType": {
+              "typeId": "struct",
+              "class": "GradePetitionTargetsItem"
+            }
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "RemovePetitionTermTargetRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 3,
+          "name": "uid",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "RemovePetitionCandidacyTargetRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 3,
+          "name": "uid",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "GetPetitionTargetsRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 2,
+          "name": "pagination_params",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "shared.BoundaryLimitPaginationParams"
+          },
+          "required": "req_out"
+        },
+        {
+          "key": 4,
+          "name": "filter_params",
+          "typeId": "struct",
+          "type": {
+            "typeId": "struct",
+            "class": "GetPetitionTargetsFilterParams"
+          },
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "GetMatchingPetitionTermTargetsRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "petition_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "term_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "PublishPetitionGradesRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "petition_uid",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "LaunchPetitionRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "petition_uid",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "ClosePetitionRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "petition_uid",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "GetEntityTermPetitionGradeCountsRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "entity_uuid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "term_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "EntityTermPetitionGradeCount",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "entity_uuid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "term_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "success_count",
+          "typeId": "i32",
+          "required": "req_out"
+        },
+        {
+          "key": 4,
+          "name": "failure_count",
+          "typeId": "i32",
+          "required": "req_out"
+        },
+        {
+          "key": 5,
+          "name": "neutral_count",
+          "typeId": "i32",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "FilterTermsByEntityActionsRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "entity_uuid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "term_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "filter_option",
+          "typeId": "i32",
+          "required": "req_out"
+        },
+        {
+          "key": 4,
+          "name": "petition_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "GetPetitionTargetSignaturesCountRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "petition_target_uid",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    }
+  ],
+  "constants": [
+  ],
+  "services": [
+    {
+      "name": "ActionService",
+      "functions": [
+        {
+          "name": "create_petition",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "Petition"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "CreatePetitionRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "edit_petition",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "Petition"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "EditPetitionRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "get_petitions",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "PaginatedPetitions"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "GetPetitionsRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "create_petition_signature",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "PetitionSignature"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "CreatePetitionSignatureRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "get_entity_signatures",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "PaginatedPetitionSignatures"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "GetEntitySignaturesRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "get_petition_signatures",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "PaginatedPetitionSignatures"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "GetPetitionSignaturesRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "is_permitted_to_sign_petition",
+          "returnTypeId": "bool",
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "IsPermittedToSignPetitionRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "add_petition_term_targets",
+          "returnTypeId": "list",
+          "returnType": {
+            "typeId": "list",
+            "elemTypeId": "struct",
+            "elemType": {
+              "typeId": "struct",
+              "class": "PetitionTermTarget"
+            }
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "AddPetitionTermTargetsRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "add_petition_candidacy_targets",
+          "returnTypeId": "list",
+          "returnType": {
+            "typeId": "list",
+            "elemTypeId": "struct",
+            "elemType": {
+              "typeId": "struct",
+              "class": "PetitionCandidacyTarget"
+            }
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "AddPetitionCandidacyTargetsRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "remove_petition_term_target",
+          "returnTypeId": "void",
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "RemovePetitionTermTargetRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "remove_petition_candidacy_target",
+          "returnTypeId": "void",
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "RemovePetitionCandidacyTargetRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "grade_petition_targets",
+          "returnTypeId": "list",
+          "returnType": {
+            "typeId": "list",
+            "elemTypeId": "union",
+            "elemType": {
+              "typeId": "union",
+              "class": "PetitionTarget"
+            }
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "GradePetitionTargetsRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "get_petition_targets",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "PaginatedPetitionTargets"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "header",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "GetPetitionTargetsRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "get_matching_petition_term_targets",
+          "returnTypeId": "list",
+          "returnType": {
+            "typeId": "list",
+            "elemTypeId": "struct",
+            "elemType": {
+              "typeId": "struct",
+              "class": "PetitionTermTarget"
+            }
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "header",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "GetMatchingPetitionTermTargetsRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "launch_petition",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "Petition"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "LaunchPetitionRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "publish_petition_grades",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "Petition"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "PublishPetitionGradesRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "close_petition",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "Petition"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "ClosePetitionRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "get_entity_term_petition_grade_counts",
+          "returnTypeId": "list",
+          "returnType": {
+            "typeId": "list",
+            "elemTypeId": "struct",
+            "elemType": {
+              "typeId": "struct",
+              "class": "EntityTermPetitionGradeCount"
+            }
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "GetEntityTermPetitionGradeCountsRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "receive_event_bus_message_parcel",
+          "returnTypeId": "void",
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "message_parcel",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "event_bus.MessageParcel"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+          ]
+        },
+        {
+          "name": "filter_terms_by_entity_actions",
+          "returnTypeId": "list",
+          "returnType": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "FilterTermsByEntityActionsRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "get_petition_target_signatures_count",
+          "returnTypeId": "i32",
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "GetPetitionTargetSignaturesCountRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

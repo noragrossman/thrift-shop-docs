@@ -1,0 +1,532 @@
+{
+  "name": "alignment",
+  "namespaces": {
+    "java": "services.alignment",
+    "rb": "ThriftShop.Alignment",
+    "scala": "services.scala.alignment"
+  },
+  "includes": [
+"shared",
+"event_bus"
+  ],
+  "enums": [
+    {
+      "name": "PopulationType",
+      "members": [
+        {
+          "name": "DISTRICT",
+          "value": 1
+        },
+        {
+          "name": "GROUP",
+          "value": 2
+        },
+        {
+          "name": "PETITION",
+          "value": 3
+        },
+        {
+          "name": "USER",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "PositionAgreement",
+      "members": [
+        {
+          "name": "AGREE",
+          "value": 1
+        },
+        {
+          "name": "DISAGREE",
+          "value": 2
+        },
+        {
+          "name": "SKIP",
+          "value": 3
+        }
+      ]
+    }
+  ],
+  "typedefs": [
+  ],
+  "structs": [
+    {
+      "name": "DeletePositionResponseRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "entity_uuid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "position_uid",
+          "typeId": "string",
+          "required": "req_out"
+        }
+      ]
+    },
+    {
+      "name": "EntityAlignment",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "entity_uuid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "population_uuid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "population_type",
+          "typeId": "i32",
+          "required": "req_out"
+        },
+        {
+          "key": 4,
+          "name": "position_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 5,
+          "name": "topic_uid",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 6,
+          "name": "score",
+          "typeId": "double",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "PositionUpdateAlignment",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "entity_uuid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "score",
+          "typeId": "double",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "GetPopulationAlignmentsRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "viewer_entity_uuid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "population_type",
+          "typeId": "i32",
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "population_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 4,
+          "name": "position_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 5,
+          "name": "topic_uid",
+          "typeId": "string",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "GetUserAlignmentsRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "viewer_entity_uuid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "target_entity_uuids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "position_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 4,
+          "name": "topic_uid",
+          "typeId": "string",
+          "required": "optional"
+        }
+      ]
+    },
+    {
+      "name": "UpdatePositionResponseRequest",
+      "isException": false,
+      "isUnion": false,
+      "fields": [
+        {
+          "key": 1,
+          "name": "entity_uuid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 2,
+          "name": "position_uid",
+          "typeId": "string",
+          "required": "req_out"
+        },
+        {
+          "key": 3,
+          "name": "agreement",
+          "typeId": "i32",
+          "required": "req_out"
+        },
+        {
+          "key": 4,
+          "name": "population_uid",
+          "typeId": "string",
+          "required": "optional"
+        },
+        {
+          "key": 5,
+          "name": "population_type",
+          "typeId": "i32",
+          "required": "optional"
+        },
+        {
+          "key": 6,
+          "name": "position_uids",
+          "typeId": "list",
+          "type": {
+            "typeId": "list",
+            "elemTypeId": "string"
+          },
+          "required": "optional"
+        },
+        {
+          "key": 7,
+          "name": "topic_uid",
+          "typeId": "string",
+          "required": "optional"
+        }
+      ]
+    }
+  ],
+  "constants": [
+  ],
+  "services": [
+    {
+      "name": "AlignmentService",
+      "functions": [
+        {
+          "name": "delete_position_response",
+          "returnTypeId": "void",
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "DeletePositionResponseRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "get_population_alignments",
+          "returnTypeId": "list",
+          "returnType": {
+            "typeId": "list",
+            "elemTypeId": "struct",
+            "elemType": {
+              "typeId": "struct",
+              "class": "EntityAlignment"
+            }
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "GetPopulationAlignmentsRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "get_user_alignments",
+          "returnTypeId": "list",
+          "returnType": {
+            "typeId": "list",
+            "elemTypeId": "struct",
+            "elemType": {
+              "typeId": "struct",
+              "class": "EntityAlignment"
+            }
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "GetUserAlignmentsRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        },
+        {
+          "name": "receive_event_bus_message_parcel",
+          "returnTypeId": "void",
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "message_parcel",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "event_bus.MessageParcel"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+          ]
+        },
+        {
+          "name": "update_position_response",
+          "returnTypeId": "struct",
+          "returnType": {
+            "typeId": "struct",
+            "class": "PositionUpdateAlignment"
+          },
+          "oneway": false,
+          "arguments": [
+            {
+              "key": 1,
+              "name": "headers",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "shared.RequestHeaders"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "request",
+              "typeId": "struct",
+              "type": {
+                "typeId": "struct",
+                "class": "UpdatePositionResponseRequest"
+              },
+              "required": "req_out"
+            }
+          ],
+          "exceptions": [
+            {
+              "key": 1,
+              "name": "argument_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.ArgumentException"
+              },
+              "required": "req_out"
+            },
+            {
+              "key": 2,
+              "name": "unauthorized_exception",
+              "typeId": "exception",
+              "type": {
+                "typeId": "exception",
+                "class": "shared.UnauthorizedException"
+              },
+              "required": "req_out"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
