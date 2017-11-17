@@ -11,6 +11,10 @@ class ThriftTypedef
     @comment = comment
   end
 
+  def to_s
+    "typedef #{type_id} #{name}\n"
+  end
+
   class << self
     def from_json(json)
       new(

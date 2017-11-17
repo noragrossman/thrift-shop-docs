@@ -16,6 +16,10 @@ class ThriftField
     @comment = comment
   end
 
+  def to_s
+    "#{key}: #{required != 'default' ? required : ''} #{type ? type.to_s : type_id} #{name}"
+  end
+
   class << self
     def from_json(json)
       new(

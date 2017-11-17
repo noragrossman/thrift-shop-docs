@@ -14,6 +14,10 @@ class ThriftContainer
     @comment = comment
   end
 
+  def to_s
+    "#{type_id}<#{elem_type ? elem_type.to_s : elem_type_id}>"
+  end
+
   class << self
     def from_json(json)
       new(

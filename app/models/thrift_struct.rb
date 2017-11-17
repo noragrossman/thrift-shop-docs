@@ -12,6 +12,22 @@ class ThriftStruct
     @comment = comment
   end
 
+  def to_s
+    struct_type = if is_exception
+      'exception'
+    elsif is_union
+      'union'
+    else
+      'struct'
+    end
+
+    struct_string = "#{struct_type} #{name} {"
+    @fields.each do |f|
+      struct_string += "  #{f.to_s},\n"
+    end
+    struct_string += '}\n'
+  end
+
   class << self
     def from_json(json)
       new(

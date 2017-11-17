@@ -13,6 +13,11 @@ class ThriftConstant
     @comment = comment
   end
 
+  def to_s
+    type_name = type ? type.to_s : type_id
+    "const #{@type_id} #{@name} = #{value}"
+  end
+
   class << self
     # 'const', 'i32', 'BOOK_LIMIT', '=', '500'
     def from_token_array(tokens)

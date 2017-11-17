@@ -10,6 +10,14 @@ class ThriftEnum
     @comment = comment
   end
 
+  def to_s
+    enum_string = "enum #{name} {" + '\n'
+    @members.each do |m|
+      enum_string += "  " + m.to_s + ","
+    end
+    enum_string += "}"
+  end
+
   class << self
     def from_json(json)
       new(

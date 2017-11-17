@@ -10,6 +10,14 @@ class ThriftService
     @comment = comment
   end
 
+  def to_s
+    service_string = "service @name {\n"
+    @functions.each do |f|
+      service_string += f.to_s + '\n\n'
+    end
+    service_string += "}\n"
+  end
+
   class << self
     def from_json(json)
       new(

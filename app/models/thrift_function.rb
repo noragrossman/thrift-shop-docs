@@ -17,6 +17,20 @@ class ThriftFunction
     @comment = comment
   end
 
+  def to_s
+    function_string = "#{return_type ? return_type.to_s : return_type_id} @name(\n"
+    @arguments.each do |a|
+      function_string += '  ' + a.to_s + ',\n'
+    end
+    if exceptions.length > 0
+      function_string += ") throws ("
+      @exceptions.each do |e|
+        function_string += '  ' + e.to_s + ',\n'
+      end
+    end
+    function_string += "),"
+  end
+
   class << self
     def from_json(json)
       new(
@@ -80,7 +94,6 @@ class ThriftFunction
           if index_next_comma.nil?
             index_next_comma = tokens.index(', ')
           end
-          puts "next few tokens = #{tokens.slice(0, 10)}"
           field_tokens = tokens.shift(index_next_comma)
           # Add the key back
           field_tokens.unshift(t)

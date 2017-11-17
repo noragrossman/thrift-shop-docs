@@ -6,6 +6,10 @@ class ThriftType
     @type_name = type_name
   end
 
+  def to_s
+    type_name
+  end
+
   class << self
     def from_json(json)
       new(

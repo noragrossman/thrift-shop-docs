@@ -14,6 +14,29 @@ class ThriftFile
     @services = services
   end
 
+  def to_s
+    file_string = @name
+    # Add typedefs
+    @typedefs.each do |t|
+      file_string += "#{t.to_s}\n"
+    end
+
+    # Add enums
+    @enum.each do |e|
+      file_string += "#{e.to_s}\n"
+    end
+
+    # Add structs
+    @structs.each do |s|
+      file_string += "#{s.to_s}\n"
+    end
+
+    # Add services
+    @services.each do |s|
+      file_string += "#{s.to_s}\n"
+    end
+  end
+
   class << self
     def from_json(json)
       new(
@@ -127,9 +150,6 @@ class ThriftFile
         services: services,
         typedefs: typedefs,
       )
-      binding.pry
     end
-
   end
-
 end

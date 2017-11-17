@@ -11,6 +11,10 @@ class ThriftEnumMember
     @comment = comment
   end
 
+  def to_s
+    "#{name} = #{value}"
+  end
+
   class << self
     def from_json(json)
       new(
