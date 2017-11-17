@@ -1,8 +1,22 @@
+typedef string Email
+
+const i32 BOOK_LIMIT = 500
+
+// The section a book should be in
+enum Category {
+  // This could be literally anything
+  NONFICTION = 0,
+  SCIFI = 1,
+  FANTASY = 2,
+  MYSTERY = 3,
+}
+
 // what's
 // sup
 struct Author {
   1: string first_name,
   2: string last_name,
+  3: Email email,
 }
 
 struct Book {

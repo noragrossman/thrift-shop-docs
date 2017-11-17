@@ -435,7 +435,7 @@ service ActionService {
 
   void receive_event_bus_message_parcel(
     1: shared.RequestHeaders headers,
-    2: event_bus.MessageParcel message_parcel
+    2: event_bus.MessageParcel message_parcel,
   ),
 
   list<shared.Uid> filter_terms_by_entity_actions(

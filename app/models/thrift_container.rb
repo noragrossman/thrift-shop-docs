@@ -2,12 +2,16 @@ class ThriftContainer
   # TODO: move this
   THRIFT_BASE_TYPES = %w(bool byte i16 i32 i64 double binary string)
 
-  attr_reader :type_id, :elem_type_id, :elem_type
+  attr_reader :type_id, :elem_type_id, :elem_type, :comment
 
   def initialize(type_id:, elem_type_id:, elem_type:)
     @type_id = type_id
     @elem_type_id = elem_type_id
     @elem_type = elem_type
+  end
+
+  def add_comment(comment)
+    @comment = comment
   end
 
   class << self
@@ -38,4 +42,5 @@ class ThriftContainer
         elem_type: elem_type,
       )
     end
+  end
 end

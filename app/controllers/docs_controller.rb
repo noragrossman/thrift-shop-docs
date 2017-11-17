@@ -16,7 +16,7 @@ class DocsController < ApplicationController
     #   @schemas.push(obj)
     # end
 
-    file = File.read('app/something.thrift')
+    file = File.read('app/action.thrift')
     # Ensure line breaks are space-separated
     file = file.gsub(/\n/, ' \n ')
 

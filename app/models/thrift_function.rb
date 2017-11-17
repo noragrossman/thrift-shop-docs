@@ -76,6 +76,11 @@ class ThriftFunction
         when /\d+:/
           # The sentinel value is the next comma
           index_next_comma = tokens.index(',')
+          # TODO Standardize Thrift files for no trailing spaces, then you can remove this
+          if index_next_comma.nil?
+            index_next_comma = tokens.index(', ')
+          end
+          puts "next few tokens = #{tokens.slice(0, 10)}"
           field_tokens = tokens.shift(index_next_comma)
           # Add the key back
           field_tokens.unshift(t)
@@ -99,7 +104,15 @@ class ThriftFunction
             arguments.push(field)
           end
         when '//'
-          # comment
+          # This is a comment until the end of the line
+          line_break_index = tokens.index('\n')
+          comment_array = tokens.shift(line_break_index)
+          new_comment = comment_array.join(' ')
+          if comment
+            comment += ' ' + new_comment
+          else
+            comment = new_comment
+          end
         when '('
           # exceptions
           adding_exceptions = true
