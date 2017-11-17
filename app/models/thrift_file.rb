@@ -50,7 +50,7 @@ class ThriftFile
     end
 
     # %i[struct Book { 1: string author , 2: i32 num_pages , }]
-    def from_token_array(tokens)
+    def from_token_array(name, tokens)
       structs = []
       services = []
       enums = []
@@ -145,6 +145,7 @@ class ThriftFile
       end
 
       new(
+        name: name,
         enums: enums,
         structs: structs,
         services: services,

@@ -1,16 +1,25 @@
 <h1>Thrift Shop API Documentation</h1>
+<div>
+  <% for @file in @files -%>
+    <button><%= @file.name %></button>
+  <% end -%>
+</div>
 <p>
-  <% for @struct in @thrift_file.structs -%>
-    <p>
-      <p><strong><%= @struct.comment %></strong></p>
-      <%= @struct.name %>
-      <ul>
-        <% for @field in @struct.fields -%>
-          <li>
-            <%= @field.name %>
-          </li>
-        <% end -%>
-      </ul>
-    </p>
+  <% for @file in @files -%>
+    <div>
+      <h1><%= @file.name %>.thrift</h1>
+
+      <% for @service in @file.services -%>
+        <div>
+          <h2><%= @service.name %></h2>
+        </div>
+      <% end -%>
+
+      <% for @struct in @file.structs -%>
+        <div>
+          <p><%= @struct.name %></p>
+        </div>
+      <% end -%>
+    </div>
   <% end -%>
 </p>

@@ -1,22 +1,25 @@
 require 'json'
 
 class DocsController < ApplicationController
-  THRIFT_FILE_PATH = 'app/gen-json/'
+  THRIFT_FILE_PATH = 'app/'
   THRIFT_FILES = [
-    'action.json',
-    'campaign.json',
+    'action',
+    'campaign',
+    'shared',
   ]
 
   def index
-    # @schemas = []
-    # THRIFT_FILES.each do |f|
-    #   file = File.read(THRIFT_FILE_PATH + f)
-    #   file_json = JSON.parse(file)
-    #   obj = ThriftFile.from_json(file_json)
-    #   @schemas.push(obj)
-    # end
+    @files = []
+    THRIFT_FILES.each do |f|
+      @files.push(read_thrift_file(THRIFT_FILE_PATH, f))
+    end
 
-    file = File.read('app/action.thrift')
+    @current_file_index = 0
+  end
+
+  def read_thrift_file(path, filename)
+    file = File.read(path + filename + '.thrift')
+
     # Ensure line breaks are space-separated
     file = file.gsub(/\n/, ' \n ')
 
@@ -26,6 +29,6 @@ class DocsController < ApplicationController
     # Split on spaces
     tokens = file.split(' ')
 
-    @thrift_file = ThriftFile.from_token_array(tokens)
+    @thrift_file = ThriftFile.from_token_array(filename, tokens)
   end
 end
