@@ -1,5 +1,16 @@
 <h1>Thrift Shop API Documentation</h1>
-
 <p>
-  <%= @json %>
+  <% for @struct in @thrift_file.structs -%>
+    <p>
+      <p><strong><%= @struct.comment %></strong></p>
+      <%= @struct.name %>
+      <ul>
+        <% for @field in @struct.fields -%>
+          <li>
+            <%= @field.name %>
+          </li>
+        <% end -%>
+      </ul>
+    </p>
+  <% end -%>
 </p>

@@ -10,7 +10,7 @@ class ThriftService
     def from_json(json)
       new(
         name: json['name'],
-        functions: json['functions'],
+        functions: json['functions'].map { |f| ThriftFunction.from_json(f) },
       )
     end
   end
