@@ -29,6 +29,7 @@ class ThriftFile
     # %i[struct Book { 1: string author , 2: i32 num_pages , }]
     def from_token_array(tokens)
       structs = []
+      services = []
 
       # This variable stores any comment that may come before an element
       comment = nil
@@ -38,7 +39,7 @@ class ThriftFile
 
         case t
         when 'struct', 'union', 'exception'
-          # Find the end paren and use that chunk to make a struct
+          # Use the next close bracket as the sentinel value
           last_token_index = tokens.index('}')
           struct_tokens = tokens.shift(last_token_index + 1)
           # put the type back on there
@@ -54,6 +55,21 @@ class ThriftFile
           end
 
           structs.push(struct)
+        when 'service'
+          # Use the next close bracket as the sentinel value
+          last_token_index = tokens.index('}')
+          service_tokens = tokens.shift(last_token_index + 1)
+          puts "Found a service: #{service_tokens}"
+
+          service = ThriftService.from_token_array(service_tokens)
+
+          # Add any comment that may have been given, THIS SHOULD GO ON ALL COMMENTABLE TYPES
+          if comment
+            service.add_comment(comment)
+            comment = nil
+          end
+
+          services.push(service)
         when '//'
           # This is a comment until the end of the line
           line_break_index = tokens.index('\n')
@@ -71,6 +87,7 @@ class ThriftFile
 
       new(
         structs: structs,
+        services: services,
       )
     end
 

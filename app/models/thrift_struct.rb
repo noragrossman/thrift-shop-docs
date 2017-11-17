@@ -41,6 +41,7 @@ class ThriftStruct
 
       # Keep track of comments
       comment = nil
+
       while tokens.count > 0
         t = tokens.shift
 
