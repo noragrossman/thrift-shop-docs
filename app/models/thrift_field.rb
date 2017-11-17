@@ -4,12 +4,12 @@ class ThriftField
 
   attr_reader :key, :name, :type_id, :type, :required, :comment
 
-  def initialize(key:, name:, type_id:, type:, required: 'default')
+  def initialize(key:, name:, type_id:, type:, required:)
     @key = key
     @name = name
     @type_id = type_id
     @type = type
-    @required = required
+    @required = required || 'default'
   end
 
   def add_comment(comment)

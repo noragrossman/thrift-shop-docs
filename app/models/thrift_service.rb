@@ -62,8 +62,6 @@ class ThriftService
             # Sentinel value is close paren
             last_token_index = tokens.index(')')
             exception_tokens = tokens.shift(last_token_index + 1)
-            # Put the return type back
-            exception_tokens.unshift(t)
 
             # Add exception to function
             function_tokens += exception_tokens
