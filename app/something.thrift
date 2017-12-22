@@ -34,6 +34,7 @@ exception BookNotFoundException {
 // and it does it really well
 service LibraryService {
   Author get_author(
+    // Find the author for this book
     1: Book book,
   ),
 

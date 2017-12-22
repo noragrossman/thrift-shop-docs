@@ -6,6 +6,7 @@ class DocsController < ApplicationController
     'action',
     'campaign',
     'shared',
+    # 'something',
   ]
 
   def index
@@ -13,8 +14,6 @@ class DocsController < ApplicationController
     THRIFT_FILES.each do |f|
       @files.push(read_thrift_file(THRIFT_FILE_PATH, f))
     end
-
-    @current_file_index = 0
   end
 
   def read_thrift_file(path, filename)

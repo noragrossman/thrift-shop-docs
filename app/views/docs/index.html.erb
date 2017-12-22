@@ -1,21 +1,110 @@
 <h1>Thrift Shop API Documentation</h1>
 <p>
+  <!-- FILES -->
   <% for @file in @files -%>
     <div>
       <h1><%= @file.name %>.thrift</h1>
 
+      <!-- SERVICES -->
       <% for @service in @file.services -%>
         <div>
           <h2><%= @service.name %></h2>
+          <i><%= @service.comment %></i>
+
+          <!-- FUNCTIONS -->
+          <% for @f in @service.functions -%>
+            <div>
+              <p>
+                <p><i><%= @f.comment %></i></p>
+                <!-- RETURN TYPE -->
+                <% if @f.return_type %>
+                  <%= link_to @f.return_type.to_s, "##{@f.return_type.to_s}" %>
+                <% else %>
+                  <span><i><%= @f.return_type_id %></i></span>
+                <% end %>
+
+                <!-- FUNCTION NAME -->
+                <strong><%= @f.name %></strong> ( <br>
+
+                <!-- FUNCTION ARGUMENTS -->
+                <div style="padding-left: 25px;">
+                  <% for @arg in @f.arguments -%>
+                    <span><%= @arg.key %>:</span>
+
+                    <% if @arg.type %>
+                      <a href="#anchor" onclick="location.reload()">Text</a>
+                      <%= link_to @arg.type.to_s, "##{@arg.type.to_s}", on_click: "location.reload()" %>
+                    <% else %>
+                      <span><i><%= @arg.type_id %></i></span>
+                    <% end %>
+
+                    <span><strong><%= @arg.name %></strong>,</span>
+                    <span><i><%= @arg.comment %></i></span>
+                    <br>
+                  <% end -%>
+                </div>
+                <br>
+                )
+              </p>
+            </div>
+          <% end -%>
         </div>
       <% end -%>
 
+      <!-- ENUMS -->
+      <h2>Enums</h2>
+      <% for @enum in @file.enums -%>
+        <div>
+          <p><%= @enum.name %></p>
+          <p><i><%= @enum.comment %></i></p>
+          <div style="padding-left: 25px">
+            <% for @member in @enum.members -%>
+              <span><strong><%= @member.name %></strong></span>
+              =
+              <span><%= @member.value %></span>
+              <span><i><%= @member.comment %></i></span>
+              <br>
+            <% end -%>
+          </div>
+        </div>
+      <% end -%>
+
+      <!-- TYPEDEFS -->
+      <h2>Typedefs</h2>
+      <% for @typedef in @file.typedefs -%>
+        <div>
+          <span><%= @typedef.name %></span>
+          <span>(<i><%= @typedef.type_id %></i>)</span>
+          <span><i><%= @typedef.comment %></i></span>
+        </div>
+      <% end -%>
+
+      <!-- STRUCTS -->
+      <a name="anchor">Hey</a>
+      <h2>Structs</h2>
       <% for @struct in @file.structs -%>
         <div>
+          <a id="<%= @struct.name %>"></a> 
           <p><%= @struct.name %></p>
+          <span><i><%= @struct.comment %></i></span>
+          <div style="padding-left: 25px;">
+            <% for @field in @struct.fields -%>
+              <span><%= @field.key %>:</span>
+
+              <% if @field.type %>
+                <%= link_to @field.type.to_s, "##{@field.type.to_s}" %>
+              <% else %>
+                <span><i><%= @field.type_id %></i></span>
+              <% end %>
+
+              <span><strong><%= @field.name %></strong>,</span>
+              <span><i><%= @field.comment %></i></span>
+              <br>
+            <% end -%>
+          </div>
         </div>
       <% end -%>
     </div>
   <% end -%>
 </p>
-<iframe width="420" height="315" src="https://www.youtube.com/embed/ru14DkRDm5g?autoplay=1"></iframe>
+<!-- <iframe width="420" height="315" src="https://www.youtube.com/embed/ru14DkRDm5g?autoplay=1"></iframe> -->
