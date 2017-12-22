@@ -1,30 +1,37 @@
 <h1>Thrift Shop API Documentation</h1>
 <p>
+  <!-- NAVIGATION -->
+  <div>
+    <% for @file in @files -%>
+      <span onclick=<%= "openFile(#{@file.name})" %> ><%= @file.name %></span>
+    <% end -%>
+  </div>
+
   <!-- FILES -->
   <% for @file in @files -%>
-    <div>
-      <h1><%= @file.name %>.thrift</h1>
+    <div class="file" id="<%= @file.name %>">
+      <h1 class="file-name"><%= @file.name %>.thrift</h1>
 
       <!-- SERVICES -->
       <% for @service in @file.services -%>
         <div>
-          <h2><%= @service.name %></h2>
-          <i><%= @service.comment %></i>
+          <h2 class="service-name"><%= @service.name %></h2>
+          <span class="comment"><%= @service.comment %></span>
 
           <!-- FUNCTIONS -->
           <% for @f in @service.functions -%>
             <div>
               <p>
-                <p><i><%= @f.comment %></i></p>
+                <p class="comment"><%= @f.comment %></p>
                 <!-- RETURN TYPE -->
                 <% if @f.return_type %>
-                  <%= link_to @f.return_type.to_s, "##{@f.return_type.to_s}" %>
+                  <span class="type-link"><%= link_to @f.return_type.to_s, "##{@f.return_type.to_s}"%></span>
                 <% else %>
-                  <span><i><%= @f.return_type_id %></i></span>
+                  <span class="base-type"><%= @f.return_type_id %></span>
                 <% end %>
 
                 <!-- FUNCTION NAME -->
-                <strong><%= @f.name %></strong> ( <br>
+                <span class="function-name"><%= @f.name %></span> ( <br>
 
                 <!-- FUNCTION ARGUMENTS -->
                 <div style="padding-left: 25px;">
@@ -32,14 +39,13 @@
                     <span><%= @arg.key %>:</span>
 
                     <% if @arg.type %>
-                      <a href="#anchor" onclick="location.reload()">Text</a>
-                      <%= link_to @arg.type.to_s, "##{@arg.type.to_s}", on_click: "location.reload()" %>
+                      <span class="type-link"><%= link_to @arg.type.to_s, "##{@arg.type.to_s}" %></span>
                     <% else %>
-                      <span><i><%= @arg.type_id %></i></span>
+                      <span class="base-type"><%= @arg.type_id %></span>
                     <% end %>
 
                     <span><strong><%= @arg.name %></strong>,</span>
-                    <span><i><%= @arg.comment %></i></span>
+                    <span class="comment"><%= @arg.comment %></span>
                     <br>
                   <% end -%>
                 </div>
@@ -80,11 +86,10 @@
       <% end -%>
 
       <!-- STRUCTS -->
-      <a name="anchor">Hey</a>
       <h2>Structs</h2>
       <% for @struct in @file.structs -%>
         <div>
-          <a id="<%= @struct.name %>"></a> 
+          <a id="<%= @struct.name %>"></a>
           <p><%= @struct.name %></p>
           <span><i><%= @struct.comment %></i></span>
           <div style="padding-left: 25px;">
@@ -108,3 +113,13 @@
   <% end -%>
 </p>
 <!-- <iframe width="420" height="315" src="https://www.youtube.com/embed/ru14DkRDm5g?autoplay=1"></iframe> -->
+<script>
+function openFile(file) {
+    var i;
+    var x = document.getElementsByClassName("file");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";
+    }
+    document.getElementById(file.id).style.display = "block";
+}
+</script>

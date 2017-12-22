@@ -17,6 +17,7 @@ struct Author {
   1: string first_name,
   2: string last_name,
   3: Email email,
+  4: optional Address address,
 }
 
 struct Book {
@@ -33,7 +34,7 @@ exception BookNotFoundException {
 // This service does some shit
 // and it does it really well
 service LibraryService {
-  Author get_author(
+  something.Author get_author(
     // Find the author for this book
     1: Book book,
   ),

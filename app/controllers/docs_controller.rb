@@ -3,10 +3,11 @@ require 'json'
 class DocsController < ApplicationController
   THRIFT_FILE_PATH = 'app/'
   THRIFT_FILES = [
-    'action',
-    'campaign',
-    'shared',
-    # 'something',
+    # 'action',
+    # 'campaign',
+    # 'shared',
+    'something',
+    'something_else',
   ]
 
   def index

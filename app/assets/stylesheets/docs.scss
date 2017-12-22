@@ -1,3 +1,26 @@
 // Place all the styles related to the Docs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+.service-name {
+  color: gray;
+}
+
+.comment {
+  font-style: italic;
+}
+
+.base-type {
+  font-style: italic;
+}
+
+.type-link {
+  
+}
